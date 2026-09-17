@@ -1,0 +1,61 @@
+{
+  "name": "dsh-tavern",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Tavern experience for DeepSeek Harness: a full central page, world-info bindings with per-owner isolation, and one-install aggregation of dsh-group-chat.",
+  "license": "MIT",
+  "keywords": [
+    "dsh-plugin",
+    "dsh-bundle",
+    "deepseek-harness",
+    "tavern",
+    "world-info"
+  ],
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./lib/index.js",
+  "files": [
+    "lib",
+    "README.md",
+    "cordis.patch.yml"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "node ../../tools/resolve-platform.mjs && tsc -p tsconfig.json",
+    "test": "node --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "@dsh-tavern/contracts": "workspace:*",
+    "dsh-group-chat": "workspace:*",
+    "safe-regex2": "^5.1.1",
+    "zod": "^4.6.5"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^18.3.23",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.9.2"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [],
+      "immediately": false
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

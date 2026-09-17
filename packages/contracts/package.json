@@ -1,0 +1,33 @@
+{
+  "name": "@dsh-tavern/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The single shared contract between dsh-tavern and dsh-group-chat: owner vocabulary, id charset, loud-reject error, and the context-seat seam.",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./client-rpc": {
+      "types": "./src/client-rpc.ts",
+      "default": "./src/client-rpc.ts"
+    },
+    "./client-slots": {
+      "types": "./src/client-slots.ts",
+      "default": "./src/client-slots.ts"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    }
+  }
+}

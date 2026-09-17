@@ -1,0 +1,14 @@
+packages:
+  - 'packages/*'
+
+# pnpm 12 reads build-script approval here, not from package.json's `pnpm` field.
+# esbuild needs its postinstall to place the platform binary.
+allowBuilds:
+  esbuild: true
+
+# Platform packages are provided by the running DSH process, never installed.
+# With auto-install on, pnpm silently fetches `@deepseek-ai/cordis` from the
+# registry into this workspace — a second cordis with a second `Service` class,
+# which would fork Service and Context identity at runtime. Types come from the
+# running install via the generated tsconfig.platform.json instead.
+autoInstallPeers: false

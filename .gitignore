@@ -1,3 +1,5 @@
 node_modules/
-*.log
+lib/
+*.tsbuildinfo
 .DS_Store
+.tmp/

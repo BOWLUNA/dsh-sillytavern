@@ -1,0 +1,12 @@
+# dsh-group-chat bundle patch.
+#
+# One row drives both faces: the host half registers the `groupChat` service,
+# and the client half enters the browser roster through the package's
+# `dsh.client` field.
+#
+# A bundle patch may only `insert`. The profile's own cordis.patch.yml can only
+# replace rows that already exist — writing an insert there fails with
+# "entry not found". That distinction cost the legacy project a build cycle.
+- insert:
+    - id: group-chat
+      name: dsh-group-chat

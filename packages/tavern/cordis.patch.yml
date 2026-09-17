@@ -1,0 +1,17 @@
+# dsh-tavern bundle patch — the aggregate install.
+#
+# This inserts both rows, so one `dsh plugin add dsh-tavern` gives the whole
+# tavern: the experience itself, plus group chat.
+#
+# Install EITHER this bundle OR `dsh-group-chat` individually — not both. Both
+# declare a row with id `group-chat`, and a composition tree holds one row per
+# id; installing both is a duplicate, not a merge. (The legacy aggregate had the
+# same shape and the same trap.)
+#
+# A bundle patch may only `insert`. The profile's own cordis.patch.yml can only
+# replace rows that already exist — an insert there fails with "entry not found".
+- insert:
+    - id: group-chat
+      name: dsh-group-chat
+    - id: tavern
+      name: dsh-tavern

@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "../../tsconfig.base.json",
+    "../../tsconfig.platform.json"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "tests/**/*.ts",
+    "../../types/**/*.d.ts"
+  ]
+}

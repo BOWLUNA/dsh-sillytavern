@@ -1,0 +1,20 @@
+{
+  "name": "dsh-sillytavern-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "platform": "node tools/resolve-platform.mjs",
+    "build": "node tools/resolve-platform.mjs && pnpm -r run build",
+    "typecheck": "node tools/resolve-platform.mjs && pnpm -r run typecheck",
+    "test": "pnpm -r run test",
+    "verify:client": "node tools/verify-client-manifest.mjs",
+    "install:local": "node tools/install-local.mjs",
+    "verify": "pnpm run build && pnpm run typecheck && pnpm run test && pnpm run verify:client"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "typescript": "^5.9.2"
+  }
+}

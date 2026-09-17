@@ -1,0 +1,286 @@
+/*
+ * The tavern page. Prefix `dtv-` (dsh tavern), platform theme tokens only, and
+ * every block self-bounded with `max-width: 100%` + `box-sizing: border-box`
+ * so nothing can overflow its container silently.
+ *
+ * The grid is `auto-fill` + `minmax`, so a narrow panel collapses to one column
+ * on its own — instead of a `@media` rule listing class names one by one, which
+ * is how the legacy project shipped a responsive bug twice: the breakpoint
+ * covered nine selectors, and the tenth was found later by a review.
+ */
+
+.dtv-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px;
+  max-width: 100%;
+  box-sizing: border-box;
+  color: var(--dsw-alias-label-primary);
+}
+
+.dtv-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dtv-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.dtv-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.dtv-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  max-width: 100%;
+}
+
+.dtv-card {
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 10px;
+  background: var(--dsw-alias-bg-layer-1);
+}
+
+.dtv-card-title {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dtv-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.dtv-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ── World books ──────────────────────────────────────────────────────────
+ *
+ * Rows wrap rather than overflow, and flexible children carry `min-width: 0`,
+ * so there is no list of selectors to keep in sync at a breakpoint — which is
+ * how the legacy project shipped two responsive bugs, one selector at a time.
+ */
+
+.dtv-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 100%;
+}
+
+.dtv-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  max-width: 100%;
+}
+
+.dtv-input {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 6px;
+  font-size: 13px;
+  background: var(--dsw-alias-bg-base);
+  color: var(--dsw-alias-label-primary);
+}
+
+.dtv-book-name,
+.dtv-target,
+.dtv-book-select {
+  flex: 1 1 140px;
+}
+
+.dtv-button {
+  min-width: 0;
+  padding: 6px 12px;
+  border: 1px solid var(--dsw-alias-border-l2);
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  background: var(--dsw-alias-bg-layer-2);
+  color: var(--dsw-alias-label-primary);
+}
+
+.dtv-button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.dtv-button-quiet {
+  border-color: var(--dsw-alias-border-l1);
+  background: transparent;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.dtv-error {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--dsw-alias-state-error-primary);
+}
+
+.dtv-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 100%;
+}
+
+.dtv-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--dsw-alias-bg-layer-2);
+}
+
+.dtv-row-name {
+  flex: 1 1 100px;
+  min-width: 0;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  color: var(--dsw-alias-label-primary);
+}
+
+.dtv-row-id {
+  min-width: 0;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.dtv-badge {
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  background: var(--dsw-alias-bg-layer-1);
+  color: var(--dsw-alias-label-secondary);
+}
+
+/* ── Entry editor and tester ────────────────────────────────────────────── */
+
+.dtv-editor {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--dsw-alias-border-l1);
+}
+
+.dtv-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 6px;
+}
+
+.dtv-entry-head,
+.dtv-entry-flags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.dtv-entry-keys,
+.dtv-entry-content {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.dtv-entry-order {
+  width: 5rem;
+}
+
+.dtv-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.dtv-tester {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--dsw-alias-border-l1);
+}
+
+.dtv-sample {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.dtv-result {
+  margin-top: 10px;
+}
+
+.dtv-pre {
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 8px 0 0;
+  padding: 8px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: var(--dsw-alias-bg-base);
+  color: var(--dsw-alias-label-primary);
+}
+
+.dtv-trace {
+  font-size: 12px;
+}
+
+.dtv-badge-ok {
+  color: var(--dsw-alias-state-success-primary);
+}
+
+.dtv-num,
+.dtv-tri {
+  width: 6rem;
+}

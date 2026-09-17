@@ -1,0 +1,248 @@
+/*
+ * Every selector is prefixed `dgc-` (dsh group chat) so the injected stylesheet
+ * cannot collide with another plugin's, and every colour is a platform theme
+ * token so light/dark follow for free. No hard-coded colours, ever — a plugin
+ * that hard-codes one is the plugin that looks broken in the other theme.
+ *
+ * Sizing note, learned the hard way: do NOT let this UI size itself against a
+ * platform container. The platform's settings dialog is `overflow: hidden`, so
+ * an over-wide child is silently clipped — no scrollbar, no error, just missing
+ * controls. Anything that can overflow sets `max-width: 100%` and
+ * `box-sizing: border-box` here rather than at the breakpoint.
+ */
+
+.dgc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 100%;
+  box-sizing: border-box;
+  color: var(--dsw-alias-label-primary);
+}
+
+.dgc-card {
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 8px;
+  background: var(--dsw-alias-bg-layer-1);
+}
+
+.dgc-title {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dsw-alias-label-primary);
+}
+
+.dgc-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.dgc-badge {
+  display: inline-block;
+  margin-inline-end: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  background: var(--dsw-alias-bg-layer-2);
+  color: var(--dsw-alias-label-secondary);
+}
+
+.dgc-badge-ok {
+  color: var(--dsw-alias-state-success-primary);
+}
+
+.dgc-view {
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  color: var(--dsw-alias-label-primary);
+}
+
+/* ── Room management ──────────────────────────────────────────────────────
+ *
+ * The row wraps rather than overflowing. The legacy project's responsive fix was
+ * to enumerate class names inside one breakpoint and add `max-width` to each;
+ * the tenth selector was found by a later review. `flex-wrap` plus
+ * `min-width: 0` on the flexible children means there is no list to keep in
+ * sync.
+ */
+
+.dgc-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  max-width: 100%;
+}
+
+.dgc-input,
+.dgc-select {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 6px;
+  font-size: 13px;
+  background: var(--dsw-alias-bg-base);
+  color: var(--dsw-alias-label-primary);
+}
+
+.dgc-input {
+  flex: 1 1 160px;
+}
+
+.dgc-select {
+  flex: 0 1 auto;
+}
+
+.dgc-button {
+  min-width: 0;
+  padding: 6px 12px;
+  border: 1px solid var(--dsw-alias-border-l2);
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  background: var(--dsw-alias-bg-layer-2);
+  color: var(--dsw-alias-label-primary);
+}
+
+.dgc-button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.dgc-button-quiet {
+  border-color: var(--dsw-alias-border-l1);
+  background: transparent;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.dgc-error {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--dsw-alias-state-error-primary);
+}
+
+.dgc-rooms {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 100%;
+}
+
+.dgc-room {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 8px;
+  background: var(--dsw-alias-bg-layer-1);
+}
+
+.dgc-room-name {
+  flex: 1 1 120px;
+  min-width: 0;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  color: var(--dsw-alias-label-primary);
+}
+
+.dgc-room-id {
+  min-width: 0;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+  color: var(--dsw-alias-label-secondary);
+}
+
+/* Narrow panels: collapse to one column rather than letting a row overflow. */
+@media (max-width: 640px) {
+  .dgc-card {
+    padding: 10px;
+  }
+}
+
+/* ── Members ────────────────────────────────────────────────────────────── */
+
+.dgc-room-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+.dgc-members {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--dsw-alias-border-l1);
+}
+
+.dgc-member-input {
+  flex: 1 1 120px;
+}
+
+.dgc-member-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 100%;
+}
+
+.dgc-member {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--dsw-alias-bg-layer-2);
+}
+
+.dgc-member-name {
+  flex: 1 1 100px;
+  min-width: 0;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  color: var(--dsw-alias-label-primary);
+}
+
+.dgc-member-id {
+  min-width: 0;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.dgc-room-state {
+  flex: 1 1 100%;
+  min-width: 0;
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  color: var(--dsw-alias-label-secondary);
+}
