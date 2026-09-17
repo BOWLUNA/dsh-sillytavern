@@ -28,11 +28,21 @@
 | 挂载 | 行进入组合树、插件树加载、浏览器 bundle 被发现并服务 |
 | 浏览器实测 | 建书 → 加条目 → 保存 → 测试注入 → 删除，全在真实页面上通过；含用**递归**做探针验证书级设置真的到达引擎 |
 
-## 关于本仓库里的 `dsh-group-chat`
+## 关于本仓库里的 `dsh-group-chat` 与 `contracts`
 
-本仓库是**聚合包**，它的 bundle 补丁会插入群聊那一行，所以安装它必须能解析到群聊包。`dsh-group-chat` 目前**尚未发布到 npm**，因此这里**内置了一份副本**（`packages/group-chat`），让本仓库可以独立安装、构建与测试。
+本仓库是**聚合包**，它的 bundle 补丁会插入群聊那一行，所以安装它必须能解析到群聊包。`dsh-group-chat` 目前**尚未发布到 npm**，因此这里**内置了一份副本**（`packages/contracts` 与 `packages/group-chat`），让本仓库可以独立安装、构建与测试。
 
-它的**正式家**是 [`dsh-agent-group`](https://github.com/BOWLUNA/dsh-agent-group)。等群聊包发布后，这里的副本应当删除，改成普通依赖。**在此之前，两边会各自演进**——这是明确的已知代价，不是疏忽。
+它的**正式家**是 [`dsh-agent-group`](https://github.com/BOWLUNA/dsh-agent-group)。等群聊包发布后，这里的副本应当删除，改成普通依赖。
+
+**在此之前，两份副本必须逐字节相同，而这件事不靠自觉维持：**
+
+```sh
+pnpm run check:sync   # 拉对端仓库逐文件比对；分叉即失败并列出文件名
+```
+
+`tools/sync-guard.yml` 是同一脚本的 CI 版本，**目前在仓库里但尚未生效**——本机 `gh` 的 OAuth token 没有 `workflow` 权限，GitHub 拒绝创建 `.github/workflows/*`。要启用：`gh auth refresh -s workflow`，然后把该文件移到 `.github/workflows/sync-guard.yml`。在启用之前，守卫只在手动跑时生效。
+
+要改共享包：**在 `dsh-agent-group` 里改，同步过来，然后两边都推**——直接改这里的副本会被守卫抓住。
 
 ## 构建与测试
 

@@ -1,0 +1,25 @@
+# 共享包同步守卫的 CI 版本——现在还不生效，因为本机 gh 的 OAuth token 没有 workflow 权限。
+#
+# 启用方法（两条，任选）：
+#   gh auth refresh -s workflow      # 授权后把本文件移到 .github/workflows/sync-guard.yml
+#   或在 GitHub 网页端直接新建该文件并粘贴下面的内容
+#
+# 未启用期间，守卫仍然有效，只是要手动跑：pnpm run check:sync
+#
+name: sync-guard
+
+# 共享包在两个仓库各存一份。任何一边推上来都重新比对，
+# 分叉时直接红灯，而不是等它悄悄烂掉。
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  check-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node tools/check-sync.mjs

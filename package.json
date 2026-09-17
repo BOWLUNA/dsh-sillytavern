@@ -10,6 +10,7 @@
     "typecheck": "node tools/resolve-platform.mjs && pnpm -r run typecheck",
     "test": "pnpm -r run test",
     "verify:client": "node tools/verify-client-manifest.mjs",
+    "check:sync": "node tools/check-sync.mjs",
     "install:local": "node tools/install-local.mjs",
     "verify": "pnpm run build && pnpm run typecheck && pnpm run test && pnpm run verify:client"
   },
