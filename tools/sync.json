@@ -1,6 +1,10 @@
 {
   "repo": "dsh-sillytavern",
   "sibling": "dsh-agent-group",
-  "shared": ["packages/contracts", "packages/group-chat"],
+  "shared": [
+    "packages/contracts",
+    "packages/group-chat",
+    "docs"
+  ],
   "canonical": "dsh-agent-group"
 }

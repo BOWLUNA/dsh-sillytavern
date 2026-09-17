@@ -40,9 +40,11 @@
 pnpm run check:sync   # 拉对端仓库逐文件比对；分叉即失败并列出文件名
 ```
 
+守卫比对 `packages/contracts`、`packages/group-chat`，以及两个仓库共用的主设计记录 `docs/`。
+
 `tools/sync-guard.yml` 是同一脚本的 CI 版本，**目前在仓库里但尚未生效**——本机 `gh` 的 OAuth token 没有 `workflow` 权限，GitHub 拒绝创建 `.github/workflows/*`。要启用：`gh auth refresh -s workflow`，然后把该文件移到 `.github/workflows/sync-guard.yml`。在启用之前，守卫只在手动跑时生效。
 
-要改共享包：**在 `dsh-agent-group` 里改，同步过来，然后两边都推**——直接改这里的副本会被守卫抓住。
+要改共享内容：**在 `dsh-agent-group` 里改并先推，再同步过来推这边**——直接改这里的副本会被守卫抓住。
 
 ## 构建与测试
 
